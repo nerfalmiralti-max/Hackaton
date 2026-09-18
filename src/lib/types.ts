@@ -1,10 +1,11 @@
 export type Language = "ru" | "kk" | "en";
-export type View = "chat" | "knowledge" | "profile";
+export type View = "chat" | "knowledge" | "timetable" | "profile";
 export type SourceKind = "nis" | "file" | "image" | "general" | "web" | "context";
 export interface Source { id: string; kind: SourceKind; title: string; url?: string; excerpt?: string }
 export interface Term { en: string; ru: string; kk: string }
 export interface TutorState { mode: "teach"; stage: "explore" | "practice" | "check" | "complete"; turn: number; topic: string; misconceptions: string[]; observedMistake?: string }
 export interface Profile { name: string; school: string; grade: number; language: Language }
+export interface AuthIdentity { name?: string | null; email: string; image?: string | null }
 export interface Attachment { name: string; dataUrl: string }
 export interface Message {
   id: string; role: "user" | "assistant"; content: string;
@@ -15,7 +16,7 @@ export interface Message {
 }
 export interface Conversation { id: string; title: string; messages: Message[]; updatedAt: number; tutor?: TutorState }
 export interface KnowledgeFile { id: string; name: string; bytes: number; status: "in_progress" | "completed" | "failed"; createdAt: number }
-export interface AppStatus { configured: boolean; schoolConnected: boolean; files: KnowledgeFile[]; model: string; development: boolean }
+export interface AppStatus { configured: boolean; schoolConnected: boolean; files: KnowledgeFile[]; model: string; development: boolean; auth?: { enabled: boolean; configured: boolean } }
 export type StreamEvent =
   | { type: "delta"; text: string }
   | { type: "phase"; phase: "searching" | "thinking" }

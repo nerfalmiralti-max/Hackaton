@@ -200,6 +200,25 @@ test("navigation and profile save persist without any generation", async ({ page
   expect(calls).toBe(0);
 });
 
+test("timetable viewer selects a real-source class and adapts to mobile", async ({ page }) => {
+  const timetable = {
+    source: "edupage", sourceUrl: "https://nisaktau.edupage.org/timetable/", school: "NIS ХБН Актау", retrievedAt: "2026-09-19T10:42:00.000Z", timezone: "Asia/Aqtau", mode: "current",
+    regularTimetables: [], selectedClass: { id: "-120", name: "8A" }, classes: [{ id: "-120", name: "8A" }], weekStart: "2026-09-14",
+    days: ["2026-09-14", "2026-09-15", "2026-09-16", "2026-09-17", "2026-09-18"].map((date, index) => ({ date, weekday: index, lessons: index === 0 ? [{ id: "lesson-1", date, period: 1, startTime: "08:30", endTime: "09:10", subject: "Physics", teacher: "Teacher A", room: "305", status: "normal" }] : [] })),
+  };
+  await page.route("**/api/timetable**", route => route.fulfill({ json: timetable }));
+  await openEnglish(page);
+  await navigate(page, "Timetable");
+  await expect(page.getByRole("heading", { name: "Timetable" })).toBeVisible();
+  await expect(page.getByRole("combobox", { name: "Select your class" })).toHaveValue("");
+  await page.getByRole("combobox", { name: "Select your class" }).selectOption("-120");
+  await expect(page.locator(".lesson-main strong")).toHaveText("Physics");
+  await expect(page.locator(".lesson-meta")).toContainText("305");
+  await page.getByRole("button", { name: "Week", exact: true }).click();
+  await expect(page.locator(".week-grid")).toBeVisible();
+  await noOverflow(page);
+});
+
 test("real local catalog and RU/KK search preserve textbook page provenance", async ({ page }) => {
   const catalogResponse = await page.request.get("/api/materials");
   expect(catalogResponse.ok()).toBe(true);

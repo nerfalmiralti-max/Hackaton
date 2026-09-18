@@ -1,12 +1,14 @@
 import { deleteKnowledge } from "@/lib/server/knowledge";
 import { publicError } from "@/lib/server/openai";
 import { AppError, assertOrigin, rateLimit, sessionId } from "@/lib/server/security";
+import { requireApplicationAuth } from "@/lib/server/auth-guard";
 
 export const runtime = "nodejs";
 
 export async function DELETE(request: Request, context: { params: Promise<{ id: string }> }) {
   try {
     assertOrigin(request);
+    await requireApplicationAuth();
     const owner = await sessionId();
     rateLimit(`knowledge:delete:${owner}`, 20);
     rateLimit("knowledge:delete:global", 120);

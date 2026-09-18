@@ -4,12 +4,14 @@ import { useId, useRef, useState, type FormEvent } from "react";
 import { Check, RotateCcw, Save, Trash2, X } from "lucide-react";
 import { translations } from "@/lib/i18n";
 import { defaultProfile } from "@/lib/profile";
-import type { Language, Profile } from "@/lib/types";
+import type { AuthIdentity, Language, Profile } from "@/lib/types";
 import { profileSchema } from "@/lib/validation";
 
-export function ProfileView({ language, profile, onSave, onClearHistory }: {
+export function ProfileView({ language, profile, identity, onSignOut, onSave, onClearHistory }: {
   language: Language;
   profile: Profile;
+  identity?: AuthIdentity;
+  onSignOut?: () => void;
   onSave: (profile: Profile) => void;
   onClearHistory: () => void;
 }) {
@@ -63,6 +65,11 @@ export function ProfileView({ language, profile, onSave, onClearHistory }: {
       <p className="view-eyebrow">{t.profile}</p>
       <h1 className="view-heading" id={`${id}-title`}>{t.profileTitle}</h1>
       <p className="view-subtitle">{t.profileSub}</p>
+
+      {identity ? <section className="account-settings" aria-labelledby={`${id}-account`}>
+        <div><p className="view-eyebrow">{t.authAccount}</p><h2 id={`${id}-account`}>{t.authSchoolAccount}</h2><p>{identity.email}</p><small>{t.authConnected} · NIS AI</small></div>
+        <button type="button" className="secondary-button" onClick={onSignOut}>{t.authSignOut}</button>
+      </section> : null}
 
       <div className="profile-banner">
         <span className="avatar" aria-hidden="true">{Array.from(profile.name.trim())[0]?.toLocaleUpperCase(language)}</span>

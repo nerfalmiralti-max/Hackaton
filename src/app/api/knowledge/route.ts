@@ -2,6 +2,7 @@ import { refreshKnowledge, uploadKnowledge } from "@/lib/server/knowledge";
 import { publicError } from "@/lib/server/openai";
 import { AppError, assertOrigin, rateLimit, readLimitedBody, sessionId } from "@/lib/server/security";
 import { MAX_FILE_BYTES } from "@/lib/validation";
+import { requireApplicationAuth } from "@/lib/server/auth-guard";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -14,6 +15,7 @@ function failure(error: unknown) {
 export async function GET(request: Request) {
   try {
     assertOrigin(request);
+    await requireApplicationAuth();
     const id = await sessionId();
     rateLimit(`knowledge:read:${id}`, 30);
     rateLimit("knowledge:read:global", 240);
@@ -24,6 +26,7 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
   try {
     assertOrigin(request);
+    await requireApplicationAuth();
     const id = await sessionId();
     rateLimit(`knowledge:upload:${id}`, 6);
     rateLimit("knowledge:upload:global:day", 60, 24 * 60 * 60 * 1000);

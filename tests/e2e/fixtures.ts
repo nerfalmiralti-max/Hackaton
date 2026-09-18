@@ -58,7 +58,7 @@ export async function send(page: Page, text: string) {
   await page.getByRole("button", { name: "Send message", exact: true }).click();
 }
 
-export async function navigate(page: Page, name: "My context" | "Knowledge" | "Workspace") {
+export async function navigate(page: Page, name: "My context" | "Knowledge" | "Timetable" | "Workspace") {
   // Reload restores the saved language asynchronously; wait before checking navigation.
   await expect(page.locator(".site-shell")).toBeVisible();
   await expect(page.locator("html")).toHaveAttribute("lang", "en");

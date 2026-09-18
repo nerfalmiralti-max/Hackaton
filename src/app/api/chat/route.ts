@@ -2,6 +2,7 @@ import { chatSchema, validateImage } from "@/lib/validation";
 import { generateAnswer } from "@/lib/server/ai";
 import { getOpenAI, publicError } from "@/lib/server/openai";
 import { AppError, assertOrigin, rateLimit, readLimitedBody, sessionId } from "@/lib/server/security";
+import { requireApplicationAuth } from "@/lib/server/auth-guard";
 export const runtime = "nodejs";
 export const maxDuration = 120;
 const active = new Set<string>();
@@ -9,6 +10,7 @@ export async function POST(request: Request) {
   let session: string | undefined;
   try {
     assertOrigin(request);
+    await requireApplicationAuth();
     session = await sessionId();
     rateLimit(`chat:${session}`, 12);
     rateLimit("chat:global:day", 150, 86_400_000);
