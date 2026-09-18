@@ -1,0 +1,13 @@
+node_modules/
+.next/
+out/
+.env*
+!.env.example
+.data/
+*.tsbuildinfo
+dev-*.log
+dev-port.txt
+test-results/
+playwright-report/
+coverage/
+.artifacts/

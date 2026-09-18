@@ -1,0 +1,69 @@
+[
+  {
+    "id": "g8-mathematics-p2-kk",
+    "name": "Mathematics - Grade 8 - Part 2 (Kazakh)",
+    "subject": "Mathematics",
+    "grade": 8,
+    "language": "kk",
+    "originalFilename": "G8_\u041c\u0430\u0442\u0435\u043c\u0430\u0442\u0438\u043a\u0430_LB_P2_KZ_NIS_\u0441.pdf",
+    "textPath": ".data/knowledge/g8-mathematics-p2-kk.txt",
+    "pages": 256,
+    "extraction": {
+      "status": "extracted",
+      "extractor": "pypdf",
+      "pagesWithText": 256,
+      "characters": 436422,
+      "bytes": 658993
+    }
+  },
+  {
+    "id": "g8-chemistry-kk",
+    "name": "Chemistry - Grade 8 (Kazakh)",
+    "subject": "Chemistry",
+    "grade": 8,
+    "language": "kk",
+    "originalFilename": "G8_\u0425\u0438\u043c\u0438\u044f_KZ_08.01 1 1.pdf",
+    "textPath": ".data/knowledge/g8-chemistry-kk.txt",
+    "pages": 160,
+    "extraction": {
+      "status": "extracted",
+      "extractor": "pypdf",
+      "pagesWithText": 160,
+      "characters": 368214,
+      "bytes": 643916
+    }
+  },
+  {
+    "id": "g7-biology-kk",
+    "name": "Biology - Grade 7 (Kazakh)",
+    "subject": "Biology",
+    "grade": 7,
+    "language": "kk",
+    "originalFilename": "G7_\u0411\u0438\u043e\u043b\u043e\u0433\u0438\u044f_SB_KZ 15.10.2025.pdf",
+    "textPath": ".data/knowledge/g7-biology-kk.txt",
+    "pages": 0,
+    "extraction": {
+      "status": "failed",
+      "pagesWithText": 0,
+      "characters": 0,
+      "bytes": 0
+    }
+  },
+  {
+    "id": "g8-mathematics-p1-ru",
+    "name": "Mathematics - Grade 8 - Part 1 (Russian)",
+    "subject": "Mathematics",
+    "grade": 8,
+    "language": "ru",
+    "originalFilename": "G8_\u041c\u0430\u0442\u0435\u043c\u0430\u0442\u0438\u043a\u0430_LB_P1_RU_NIS_\u0441.pdf",
+    "textPath": ".data/knowledge/g8-mathematics-p1-ru.txt",
+    "pages": 192,
+    "extraction": {
+      "status": "extracted",
+      "extractor": "pypdf",
+      "pagesWithText": 192,
+      "characters": 328037,
+      "bytes": 507224
+    }
+  }
+]
