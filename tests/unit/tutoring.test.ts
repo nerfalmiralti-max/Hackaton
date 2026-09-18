@@ -141,8 +141,9 @@ describe("one-generation tutoring stream (mocked)", () => {
   });
 
   it("preserves free source fallback without adopting generated tutoring evidence", async () => {
+    upstream("Web answer?");
     const result = await collect(chat({ tutor: incoming, sourceMode: "school" }));
-    expect(result.done).toMatchObject({ needsFallback: true, sources: [], tutor: { topic: "", misconceptions: [], turn: 3 } });
-    expect(mocks.stream).not.toHaveBeenCalled();
+    expect(result.done).toMatchObject({ needsFallback: false, sources: [{ kind: "general" }], tutor: { topic: "", misconceptions: [], turn: 3 } });
+    expect(mocks.stream).toHaveBeenCalledOnce();
   });
 });
