@@ -28,7 +28,13 @@ The OpenAI API does not support fine-tuning `gpt-5.6-luna`, as listed in the off
 
 This demo stores session data locally and coordinates requests in one process. Public hosting needs authentication, persistent shared storage and shared rate limiting. Browser memory lasts only for its session; restarting without a fixed signing secret can invalidate local ownership cookies.
 
-## Verify
+## Vercel deployment
+
+`vercel.json` explicitly selects Next.js, `npm ci`, `npm run build`, and `.next` output so a project originally imported with the "Other" preset does not deploy an empty static directory. In Vercel, keep Root Directory at the repository root, Production Branch at `main`, and assign the production domain to this project. A platform `404 NOT_FOUND` can also indicate a missing deployment or domain assignment; these dashboard settings cannot be changed by Git alone.
+
+Configure secrets privately in Vercel Environment Variables; local `.env.local` is not deployed. This application's session ownership and upload storage are still designed for a single-process local demo. A working hosted page does not make serverless file ownership or public AI access production-ready; shared storage and authentication are required before public use.
+
+## Verification Commands
 
 ```sh
 npm run lint
