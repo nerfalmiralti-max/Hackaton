@@ -6,6 +6,7 @@ export interface Term { en: string; ru: string; kk: string }
 export interface TutorState { mode: "teach"; stage: "explore" | "practice" | "check" | "complete"; turn: number; topic: string; misconceptions: string[]; observedMistake?: string }
 export interface Profile { name: string; school: string; grade: number; language: Language }
 export interface AuthIdentity { name?: string | null; email: string; image?: string | null }
+export interface Recommendation { id: string; title: string; summary: string; publishedAt?: string; source: string; sourceUrl: string }
 export interface Attachment { name: string; dataUrl: string }
 export interface Message {
   id: string; role: "user" | "assistant"; content: string;
